@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#247ee8">
+    <meta name="color-scheme" content="light">
+    <title>Random Geographic Coordinates Generator – Land, Country & Radius</title>
+    <meta name="description" content="Generate random geographic coordinates worldwide, on land, by country, within a radius, bounding box or custom polygon. Copy or export CSV, JSON and GeoJSON instantly.">
+    <link
+      rel="canonical"
+      href="https://yeshan-jun.github.io/random-geographic-coordinates-generator/"
+    >
+    <link rel="icon" href="./icons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="stylesheet" href="./assets/style.css">
+    <!-- VARIABLE1 -->
+    <!-- VARIABLE2 -->
+    <!-- VARIABLE3 -->
+    <!-- VARIABLE4 -->
+    <!-- VARIABLE5 -->
+    <!-- VARIABLE6 -->
+    <!-- VARIABLE7 -->
+    <!-- VARIABLE8 -->
+    <!-- VARIABLE9 -->
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Random Geographic Coordinates Generator home">
+        <img src="./icons/favicon.svg" width="46" height="46" alt="">
+        <span>Random Geographic<br>Coordinates Generator</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#use-cases">Use Cases</a>
+        <a href="#faq">FAQ</a>
+        <a
+          class="github-button"
+          href="https://github.com/yeshan-jun/random-geographic-coordinates-generator"
+          rel="nofollow noopener noreferrer"
+          target="_blank"
+          aria-label="Open the GitHub repository"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.12.68-3.78-1.32-3.78-1.32-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.49-.28-5.1-1.24-5.1-5.53 0-1.22.43-2.22 1.15-3-.12-.28-.5-1.42.1-2.96 0 0 .94-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.6 1.54.22 2.68.1 2.96.72.78 1.15 1.78 1.15 3 0 4.3-2.62 5.24-5.12 5.52.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <span class="eyebrow">Browser-based GIS utility</span>
+          <h1 id="page-title">Random Geographic Coordinates Generator</h1>
+          <p>Generate latitude and longitude points worldwide, on land, by country, within a radius, bounding box or custom polygon.</p>
+        </div>
+        <div class="hero-badges" aria-label="Product highlights">
+          <span>Private</span><span>Fast</span><span>Offline-ready</span>
+        </div>
+      </section>
+
+      <section id="generator" class="generator-layout" aria-label="Coordinate generator">
+        <aside class="control-card">
+          <div class="panel-section">
+            <div class="section-heading"><span>1</span><h2>Choose Mode</h2></div>
+            <div class="mode-grid" role="group" aria-label="Coordinate generation mode">
+              <button class="mode-button is-active" type="button" data-mode="worldwide"><span aria-hidden="true">◎</span>Worldwide</button>
+              <button class="mode-button" type="button" data-mode="land"><span aria-hidden="true">▲</span>Land Only</button>
+              <button class="mode-button" type="button" data-mode="country"><span aria-hidden="true">⚑</span>By Country</button>
+              <button class="mode-button" type="button" data-mode="radius"><span aria-hidden="true">⊙</span>Around a Point</button>
+              <button class="mode-button" type="button" data-mode="bbox"><span aria-hidden="true">□</span>Bounding Box</button>
+              <button class="mode-button" type="button" data-mode="polygon"><span aria-hidden="true">⬡</span>Draw Polygon</button>
+            </div>
+
+            <div class="mode-fields" data-fields="country" hidden>
+              <label for="country-select">Country or territory</label>
+              <select id="country-select"><option value="">Loading countries…</option></select>
+            </div>
+
+            <div class="mode-fields field-grid" data-fields="radius" hidden>
+              <label>Center latitude<input id="center-latitude" type="number" min="-90" max="90" step="any" value="1.3521"></label>
+              <label>Center longitude<input id="center-longitude" type="number" min="-180" max="180" step="any" value="103.8198"></label>
+              <label class="full-width">Radius
+                <span class="input-with-unit"><input id="radius-value" type="number" min="0.001" max="20015" step="any" value="25"><select id="radius-unit" aria-label="Radius unit"><option value="km">km</option><option value="mi">mi</option></select></span>
+              </label>
+            </div>
+
+            <div class="mode-fields field-grid" data-fields="bbox" hidden>
+              <label>North<input id="bbox-north" type="number" min="-90" max="90" step="any" value="10"></label>
+              <label>South<input id="bbox-south" type="number" min="-90" max="90" step="any" value="-10"></label>
+              <label>West<input id="bbox-west" type="number" min="-180" max="180" step="any" value="100"></label>
+              <label>East<input id="bbox-east" type="number" min="-180" max="180" step="any" value="120"></label>
+            </div>
+
+            <div id="polygon-controls" class="mode-fields polygon-controls" data-fields="polygon" hidden>
+              <p>Click the map to add at least three vertices. Double-click the map or select Finish Polygon.</p>
+              <div class="button-row">
+                <button id="polygon-undo" class="secondary-button" type="button">Undo</button>
+                <button id="polygon-finish" class="secondary-button" type="button">Finish Polygon</button>
+                <button id="polygon-clear" class="secondary-button" type="button">Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-section parameters-section">
+            <div class="section-heading"><span>2</span><h2>Set Parameters</h2></div>
+            <label for="quantity">Quantity</label>
+            <div class="quantity-row">
+              <input id="quantity" type="number" min="1" max="50000" step="1" value="100" inputmode="numeric">
+              <span>1–50,000</span>
+            </div>
+
+            <div class="field-grid compact-grid">
+              <label>Decimal precision
+                <select id="precision">
+                  <option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+                </select>
+              </label>
+              <label>Coordinate order
+                <select id="coordinate-order">
+                  <option value="lat-lng">Latitude, Longitude</option>
+                  <option value="lng-lat">Longitude, Latitude</option>
+                </select>
+              </label>
+            </div>
+
+            <label for="seed">Seed <span class="label-note">optional</span></label>
+            <input id="seed" type="text" maxlength="120" placeholder="e.g. test-data-2026" autocomplete="off">
+
+            <label class="switch-row" for="unique-points">
+              <input id="unique-points" type="checkbox" checked>
+              <span class="switch" aria-hidden="true"></span>
+              Unique points only
+            </label>
+
+            <div id="generator-status" class="status-message" aria-live="polite">Ready to generate random coordinates worldwide.</div>
+
+            <button id="generate-button" class="primary-button" type="button">
+              <span aria-hidden="true">✦</span>Generate Coordinates
+            </button>
+
+            <div class="action-grid">
+              <button id="copy-button" class="secondary-button" type="button" disabled>Copy All</button>
+              <select id="download-format" aria-label="Download format">
+                <option value="csv">CSV</option>
+                <option value="json">JSON</option>
+                <option value="geojson">GeoJSON</option>
+              </select>
+              <button id="download-button" class="secondary-button" type="button" disabled>Download</button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="workspace-card">
+          <div class="information-banner">
+            <span aria-hidden="true">✓</span>
+            <p id="mode-description">Generate random coordinates worldwide. Points are distributed uniformly across the Earth's surface.</p>
+          </div>
+
+          <div class="map-panel">
+            <div id="world-map" role="application" aria-label="Interactive detailed map with generated coordinate markers"></div>
+            <div class="map-controls" aria-label="Map controls">
+              <button id="map-zoom-in" type="button" aria-label="Zoom in">+</button>
+              <button id="map-zoom-out" type="button" aria-label="Zoom out">−</button>
+              <button id="map-reset" type="button" aria-label="Reset map view">⌂</button>
+            </div>
+            <div class="map-label">Detailed map</div>
+            <a class="map-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="nofollow noopener noreferrer">© OpenStreetMap contributors</a>
+            <div id="map-coordinate-readout" class="map-readout" aria-live="polite">Select a generated point to view its coordinates.</div>
+          </div>
+
+          <div class="results-panel">
+            <div class="table-wrap">
+              <div class="results-heading">
+                <div><h2>Sample Results</h2><p id="result-summary">Generate coordinates to see a preview.</p></div>
+                <span id="map-sample-note"></span>
+              </div>
+              <div class="table-scroll">
+                <table aria-label="Generated coordinate preview">
+                  <thead><tr><th>#</th><th id="first-coordinate-heading">Latitude</th><th id="second-coordinate-heading">Longitude</th></tr></thead>
+                  <tbody id="results-body">
+                    <tr class="empty-row"><td colspan="3">No coordinates generated yet.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <aside class="export-card">
+              <div class="export-icon" aria-hidden="true">⇩</div>
+              <div><h3>Bulk Export</h3><p>Download up to 50,000 coordinates as CSV, JSON or GeoJSON.</p></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-strip" aria-label="Key features">
+        <article><span>◎</span><div><h2>Multiple Modes</h2><p>Generate worldwide, land, country, radius, bounding box and polygon coordinates.</p></div></article>
+        <article><span>⇩</span><div><h2>Bulk Export</h2><p>Export developer-ready CSV, JSON and GeoJSON files instantly.</p></div></article>
+        <article><span>↻</span><div><h2>Reproducible</h2><p>Use a seed to recreate the same coordinate set for testing and sharing.</p></div></article>
+        <article><span>▣</span><div><h2>Private by Design</h2><p>Generation runs in your browser and your coordinate data stays on your device.</p></div></article>
+      </section>
+
+      <section id="how-it-works" class="content-section">
+        <div class="section-intro"><span class="eyebrow">Three simple steps</span><h2>How the random coordinates generator works</h2><p>Create usable coordinate data without installing GIS software.</p></div>
+        <div class="content-grid three-columns">
+          <article><span class="number-icon">1</span><h3>Generate</h3><p>Choose a geographic mode, enter the quantity and set precision, order and an optional seed.</p></article>
+          <article><span class="number-icon">2</span><h3>Preview</h3><p>Review generated points on a detailed map that automatically focuses on the selected country, radius, bounding box or polygon.</p></article>
+          <article><span class="number-icon">3</span><h3>Export</h3><p>Copy all coordinates or download CSV, JSON and GeoJSON for immediate use.</p></article>
+        </div>
+      </section>
+
+      <section id="use-cases" class="content-section alt-section">
+        <div class="section-intro"><span class="eyebrow">Built for practical location data</span><h2>Random coordinate generator use cases</h2></div>
+        <div class="content-grid three-columns">
+          <article><h3>Software testing</h3><p>Create deterministic GPS fixtures for map interfaces, geofencing, location search and database tests.</p></article>
+          <article><h3>GIS and spatial analysis</h3><p>Generate random point samples within countries, land areas, bounding boxes and custom polygons.</p></article>
+          <article><h3>Logistics research</h3><p>Build synthetic pickup, delivery and routing locations for transport models and optimization experiments.</p></article>
+        </div>
+      </section>
+
+      <section id="faq" class="content-section faq-section">
+        <div class="section-intro"><span class="eyebrow">Answers</span><h2>Frequently asked questions</h2></div>
+        <div class="faq-list">
+          <details><summary>Are worldwide coordinates evenly distributed?</summary><p>Yes. Worldwide mode samples latitude by spherical surface area so points are distributed evenly across the Earth instead of clustering near the poles.</p></details>
+          <details><summary>What does Land Only include?</summary><p>Land Only uses local Natural Earth country geometry to keep generated points on represented land areas, including major islands and Antarctica.</p></details>
+          <details><summary>Which coordinate order does GeoJSON use?</summary><p>GeoJSON always stores coordinates as longitude, latitude. CSV and JSON can use either latitude, longitude or longitude, latitude.</p></details>
+          <details><summary>How does the seed work?</summary><p>The same seed and generation settings produce the same coordinate sequence, which is useful for repeatable tests, datasets and shared examples.</p></details>
+          <details><summary>Does the app work offline?</summary><p>After the first successful visit, the PWA caches all local app files and geographic data. Later visits try the network first and use the cache when the network is unavailable.</p></details>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <footer>© 2026 Random Geographic Coordinates Generator</footer>
+    <script type="module" src="./assets/app.js"></script>
+  </body>
+</html>

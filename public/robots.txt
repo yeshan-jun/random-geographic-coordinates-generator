@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yeshan-jun.github.io/random-geographic-coordinates-generator/sitemap.xml
