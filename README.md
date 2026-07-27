@@ -59,7 +59,7 @@ The source stack is HTML, CSS, and modern JavaScript modules. The project has no
 
 Coordinate generation is separated into focused modules for random number creation, validation, geographic sampling, formatting, exporting, map control, and worker communication. Seeded generation uses an internal deterministic random-number implementation. Worldwide coordinates are sampled across a sphere. Radius points are calculated with spherical destination formulas. Polygon and country modes use point-in-polygon checks, polygon bounding boxes, and partition-aware sampling for multi-polygon regions and islands.
 
-The country dataset is stored locally under `public/data`. It is based on Natural Earth low-resolution public-domain geographic boundaries and is prepared for efficient browser use. Detailed online map tiles are displayed when available, while the locally stored vector geometry provides geographic context and supports generation without a remote geocoding service.
+The country dataset is stored locally under the root-level `data` directory. It is based on Natural Earth low-resolution public-domain geographic boundaries and is prepared for efficient browser use. Detailed online map tiles are displayed when available, while the locally stored vector geometry provides geographic context and supports generation without a remote geocoding service.
 
 The PWA manifest defines the application name, appearance, start URL, scope, and installable icons. The Service Worker precaches all same-origin production assets. Navigation and static asset requests use network-first behavior, so updated files are preferred whenever the server is reachable. Cached files provide a fallback for offline access or temporary network failure. Cross-origin map tile traffic is not added to the application cache.
 
@@ -75,7 +75,10 @@ random-geographic-coordinates-generator/
 │   ├── map/                  Map rendering and automatic viewport control
 │   └── workers/              Background coordinate generation
 ├── docs/                     Design and implementation documentation
-├── public/                   Manifest, Service Worker, icons, and geographic data
+├── data/                     Local geographic boundary dataset
+├── icons/                    PWA and browser icons
+├── manifest.webmanifest      Installable PWA metadata
+├── sw.js                     Network-first Service Worker
 ├── scripts/                  Static development server and production build script
 ├── tests/                    Automated Node.js tests
 ├── index.html                SEO content and application interface
